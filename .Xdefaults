@@ -1,0 +1,57 @@
+XTerm.termName: xterm-256color
+
+! Fonts ====================================================
+! set font and fontsize
+! XTerm*faceName: DejaVu Sans Mono
+XTerm*faceName: JetBrainsMonoNL Nerd Font Mono
+XTerm*faceSize: 12
+
+! VT Font Menu: Unreadable
+xterm*faceSize1: 8
+! VT font menu: Tiny
+xterm*faceSize2: 10
+! VT font menu: Medium
+xterm*faceSize3: 12
+! VT font menu: Large
+xterm*faceSize4: 16
+! VT font menu: Huge
+xterm*faceSize5: 22
+
+! Ensure that your locale is set up for UTF-8. If you do not use UTF-8, 
+! you may need to force xterm to more strictly follow your locale by setting
+XTerm.vt100.locale: true
+
+! Cursor ====================================================
+! pointer and cursor (blinking and color)
+XTerm*pointerColor: white
+XTerm*pointerColorBackground: black
+XTerm*cursorColor: white
+XTerm*cursorBlink: true
+
+!! Keybinding ========================================================
+! http://blog.rot13.org/2010/03/change-font-size-in-xterm-using-keyboard.html
+! - change fontsize on the fly (ctrl+plus = increase ; ctrl+minus = decrease, ctrl+0 = default)
+! - copy/paste hotkey (ctrl+shift+c = copy ; ctrl+shift+v = paste)
+! - open url (clickable links)
+!   1) double click to highlight the full url
+!   2) Shift + click it to open it
+XTerm.vt100.translations: #override \n\
+  Ctrl <Key> minus: smaller-vt-font() \n\
+  Ctrl <Key> plus: larger-vt-font() \n\
+
+!-------- Theme: Solarized {{{
+!------------------------------------------------------
+
+!!Source http://github.com/altercation/solarized
+
+!*background: #0e0c06
+*background: #282828
+!*foreground: #657b83
+*foreground: #e3d8e9
+!!*fading: 40
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+! }}}
