@@ -16,6 +16,7 @@
 (global-auto-revert-mode 1)    ; Auto revert buffers for changed files
 (savehist-mode 1)              ; Remember minibuf command lists
 (setq history-length 25)       ; Numbers of command that remembered
+(setq-default indent-tabs-mode nil)    ; Prevent Extraneous Tabs
 
 ;; Merge from old config
 (defun duplicate-line (arg)
@@ -72,6 +73,12 @@
 ;; Remove trailing whitespace before saving
 (add-hook 'before-save-hook 'my-prog-nuke-trailing-whitespace)
 
+;; Custom function to convert TAB to SPACE
+(defun remove-hard-tabs ()
+  "Replace hard tabs with spaces before saving the file."
+  (when (derived-mode-p 'prog-mode) ; Only apply to programming modes
+    (untabify (point-min) (point-max))))
+(add-hook 'before-save-hook 'remove-hard-tabs)
 
 ;; ;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=34341
 ;; ;; Setup this variable to make package install with old TLS
@@ -98,10 +105,14 @@
 (global-set-key (kbd "<C-tab>") 'other-window)
 (global-set-key (kbd "<f4>") 'goto-line)
 (global-set-key (kbd "<f5>") 'query-replace)
+(global-set-key [f10] 'align-regexp)
+(global-set-key [f9] "\C-u 'align-regexp")
+(global-set-key [C-mouse-4] '(lambda () (interactive) (text-scale-increase 1)))
+(global-set-key [C-mouse-5] '(lambda () (interactive) (text-scale-decrease 1)))
 
 ;; Show line number
 (global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'relative)
+;; (setq display-line-numbers-type 'relative)
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
@@ -344,6 +355,28 @@
 ;; Any files that end in .v, .dv or .sv should be in verilog mode
 (add-to-list 'auto-mode-alist '("\\.[ds]?va?h?\\'" . verilog-mode))
 (add-hook 'verilog-mode-hook 'my-verilog-mode-setup)
+
+;; Additional configuration settings for verilog-mode
+(setq safe-local-variable-values
+      '((verilog-auto-inst-sort . non-nil)
+        (verilog-auto-inst-sort)
+        (verilog-auto-inst-template-required)
+        (verilog-align-decl-expr-comments)
+        (verilog-auto-sense-define-constant . t)))
+
+(setq show-paren-mode t)
+(setq verilog-align-decl-expr-comments nil)
+(setq verilog-auto-inst-param-value t)
+(setq verilog-auto-inst-sort nil)
+(setq verilog-auto-inst-template-numbers nil)
+(setq verilog-auto-inst-template-required nil)
+(setq verilog-auto-newline t)
+(setq verilog-auto-reset-widths 'unbased)
+(setq verilog-auto-save-policy nil)
+(setq verilog-auto-template-warn-unused nil)
+(setq verilog-auto-wire-type "logic")
+(setq verilog-typedef-regexp "_t$")
+(setq verilog-tab-always-indent nil)
 
 ;; Insert header
 (use-package yasnippet
