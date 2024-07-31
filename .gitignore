@@ -1,0 +1,8 @@
+.emacs.d/backup/
+.emacs.d/elpa/
+.emacs.d/emacs-custom.el
+.emacs.d/auto-save-list
+.emacs.d/history
+.emacs.d/places
+.emacs.d/projectile-bookmarks.eld
+.emacs.d/recentf
