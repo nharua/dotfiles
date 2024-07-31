@@ -1,0 +1,14 @@
+
+#+TITLE: TODO LIST
+#+AUTHOR: Vinh Huynh
+
+* Interesting Package
+** keycap
+Show current command and its key in the mode line
+
+
+* Emacs 26.1 Version
+** TODO Verilog-mode 
+SCHEDULED: <2024-07-18 Thu>
+** Request from Design teams:
+- [ ] 
