@@ -300,6 +300,42 @@
         company-tooltip-align-annotations t)
   (global-company-mode t))  ;; Enable company mode globally
 
+;; LSP Mode
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c C-l")
+  :config
+  (lsp-enable-which-key-integration t)
+ )
+
+;; LSP with verible-verilog
+;; (require 'lsp-mode)
+;; (add-to-list 'lsp-language-id-configuration '(verilog-mode . "verilog"))
+;; (lsp-register-client
+;;  (make-lsp-client :new-connection (lsp-stdio-connection "verible-verilog-ls")
+;;                   :major-modes '(verilog-mode)
+;;                   :server-id 'verible-ls))
+
+;; (add-hook 'verilog-mode-hook 'lsp)
+
+;; LSP with verible-verilog
+(require 'lsp-mode)
+
+(defun my-lsp-verible-verilog-ls ()
+  "Setup LSP for Verible Verilog LS with custom rules."
+  (let ((rules-config (expand-file-name "~/.emacs.d/verible/.rules.verible_lint")))
+    (lsp-register-client
+     (make-lsp-client
+      :new-connection (lsp-stdio-connection
+                       (list "verible-verilog-ls" (concat "--rules_config=" rules-config)))
+      :major-modes '(verilog-mode)
+      :server-id 'verible-ls))))
+
+(my-lsp-verible-verilog-ls)
+
+(add-hook 'verilog-mode-hook 'lsp)
+
 ;; Verilog-Mode
 ;; Load local verilog-mode
 ;; Define a macro to use verible-verilog-format to format a verilog/systemverilog file
