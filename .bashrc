@@ -101,4 +101,4 @@ export PS2
 # setup config for neovim
 export XDG_CONFIG_HOME=/home/$USER/.config
 export XDG_DATA_HOME=/home/$USER/.local/share
-alias nvim=/home/$USER/.local/bin/nvim
+#alias nvim=/home/$USER/.local/bin/nvim
