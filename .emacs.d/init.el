@@ -306,8 +306,23 @@
   :init
   (setq lsp-keymap-prefix "C-c C-l")
   :config
-  (lsp-enable-which-key-integration t)
+  (setq lsp-enable-which-key-integration t
+        lsp-prefer-flymake nil
+        lsp-pylsp-plugins-autopep8-enabled nil
+        lsp-pylsp-plugins-yapf-enabled nil
+        lsp-pylsp-plugins-black-enabled t)
  )
+
+(use-package flycheck
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+
+;; optionally
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :hook (lsp-mode . lsp-ui-mode))
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 ;; LSP with verible-verilog
 ;; (require 'lsp-mode)
@@ -425,6 +440,28 @@
               ;; Bind TAB key to yasnippet
               (local-set-key (kbd "C-c y") 'yas-expand)))
   )
+
+;; Python Mode
+;; Python Mode: we're using Python - Treesitter - eglot as client - pylsp as server
+;; Ref based on https://www.youtube.com/watch?v=SbTzIt6rISg
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
+
+(use-package python
+  ;; :hook ((python-ts-mode . eglot-ensure))
+  :hook ((python-ts-mode . lsp-deferred))
+  ;; :mode (("\\.py\\'" . python-ts-mode))
+  :bind (:map python-ts-mode-map
+              ("C-c f" . lsp-format-buffer))
+  )
+
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (python-ts-mode . highlight-indent-guides-mode)
+  :config
+  (set-face-background 'highlight-indent-guides-odd-face "darkgray")
+  (set-face-background 'highlight-indent-guides-even-face "dimgray")
+  (set-face-foreground 'highlight-indent-guides-character-face "white")
+  (setq highlight-indent-guides-method 'character))
 
 ;; Save custom set to emacs-custom.el
 (setq custom-file "~/.emacs.d/emacs-custom.el")
