@@ -19,7 +19,7 @@ if [ -d "${nvimlibfolder}" ]; then
     mv "${nvimlibfolder}" "${nvimlibfolder}.bck"
 fi
 
-ln -sf "${dotfilesDir}/.config/nvim" "${HOME}/.config"
+ln -sf "${dotfilesDir}/.config/nvim" "${HOME}/.config/"
 # comment out if you're on secure zone
 # ln -sf "${dotfilesDir}/.local/share/nvim" "${HOME}/.local/share"
 
