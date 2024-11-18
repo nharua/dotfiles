@@ -10,3 +10,4 @@
 .emacs.d/eshell
 .emacs.d/projects
 org~
+.local/share/fonts/nvim
