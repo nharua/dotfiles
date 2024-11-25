@@ -11,3 +11,6 @@
 .emacs.d/projects
 org~
 .local/share/fonts/nvim
+.local/share/fonts/nautilus
+.local/share/fonts/recently-used.xbel
+.local/share/fonts/virtualenv

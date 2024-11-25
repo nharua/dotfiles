@@ -7,6 +7,7 @@ fi
 
 # User specific environment and startup programs
 
-PATH=$PATH:/home/$USER/.local/bin:/home/$USER/bin
+#PATH=$PATH:/home/$USER/.local/bin:/home/$USER/bin
+PATH=$PATH:$HOME/.local/bin:$HOME/bin
 
 export PATH
