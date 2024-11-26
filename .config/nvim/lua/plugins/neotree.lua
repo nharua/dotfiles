@@ -10,6 +10,21 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		require("neo-tree").setup({})
+		require("neo-tree").setup({
+			filesystem = {
+				hijack_netrw_behavior = "open_current",
+				filtered_items = {
+					visible = true, -- This shows hidden files
+					hide_dotfiles = false,
+					hide_gitignored = false,
+				},
+				-- Ensure the keymapping for toggling hidden files
+				window = {
+					mappings = {
+						["H"] = "toggle_hidden",
+					},
+				},
+			},
+		})
 	end,
 }
